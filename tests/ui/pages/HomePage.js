@@ -1,6 +1,9 @@
+import { Header } from './Header';
+
 export class HomePage {
     constructor(page) {
         this.page = page;
+        this.header = new Header(page);
         this.partialHeader = page.getByText(/Practice Black Box Testing/);
         this.searchInput = page.locator('[data-test="search-query"]');
         this.searchButton = page.locator('[data-test="search-submit"]');
