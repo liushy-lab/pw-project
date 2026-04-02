@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from './ui/pages/HomePage';
-import { AuthPage } from './ui/pages/AuthPage';
-import { DashboardPage } from './ui/pages/DashboardPage';
+import { HomePage } from '../../pages/HomePage';
+import { AuthPage } from '../../pages/AuthPage';
+import { DashboardPage } from '../../pages/DashboardPage';
 
 test.describe('Authentication tests', () => {
     let homePage;
