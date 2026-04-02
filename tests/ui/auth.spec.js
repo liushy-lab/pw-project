@@ -1,31 +1,20 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
-import { AuthPage } from '../../pages/AuthPage';
-import { DashboardPage } from '../../pages/DashboardPage';
+import { test, expect } from '../../fixtures/baseTest';
 
 test.describe('Authentication tests', () => {
-    let homePage;
-    let authPage;
-    let dashboardPage;
 
-    test.beforeEach(async ({page}) => {
-        homePage = new HomePage(page);
+    test.beforeEach(async ({ homePage }) => {
         await homePage.openHomePage();
-
-        authPage = new AuthPage(page);
         await homePage.header.openAuthPage();
-
         })
         
-        test('Login with valid credentials', async ({ page }) => {
+        test('Login with valid credentials', async ({ authPage, dashboardPage, homePage }) => {
             await authPage.login(process.env.USER_EMAIL, process.env.USER_PASSWORD);
 
-            dashboardPage = new DashboardPage(page);
             await expect(dashboardPage.pageTitle).toHaveText('Sales over the years');
             await expect(homePage.partialHeader).toBeVisible();
     })
 
-        test('Login with invalid credentials', async ({ page }) => {
+        test('Login with invalid credentials', async ({ authPage }) => {
             await authPage.login('', '');
 
             await expect(authPage.emailAlert).toBeVisible();
